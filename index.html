@@ -6,63 +6,97 @@
     <title>Kiprono Merchandise Store</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            font-family: 'Arial', sans-serif;
         }
 
         header {
-            text-align: center;
-            background-color: #333;
+            background-color: #000;
             color: #fff;
+            text-align: center;
             padding: 10px;
+        }
+
+        nav {
+            background-color: #fff;
+            color: #000;
+            padding: 10px;
+            text-align: center;
         }
 
         nav ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            justify-content: space-around;
-            background-color: #444;
+            list-style-type: none;
             margin: 0;
+            padding: 0;
         }
 
-        nav a {
-            text-decoration: none;
-            color: #fff;
-            padding: 10px;
-            display: block;
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
         }
 
         main {
-            text-align: center;
+            background-color: #000;
+            color: #fff;
             padding: 20px;
+            text-align: center;
+        }
+
+        section {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            color: #000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #000;
+        }
+
+        p {
+            color: #333;
         }
 
         button {
-            background-color: #4285f4;
+            background-color: #000;
             color: #fff;
             padding: 10px 20px;
-            margin: 5px;
+            font-size: 16px;
             border: none;
             cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
 
-        img {
+        button:hover {
+            background-color: #333;
+        }
+
+        iframe {
             width: 100%;
-            max-width: 250px;
-            height: auto;
-            display: block;
-            margin: 20px auto;
+            height: 300px;
+            border: none;
+        }
+
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Kiprono Merchandise Store</h1>
+<h1>Kiprono Merchandise Store</h1>
+<img src="https://nairobifashionhub.co.ke/wp-content/uploads/2020/03/Nairobi-fashion-hub-Top-10-Online-Fashion-store-1.jpg" alt = "shop with us"
+width="250"
+height="250" 
+/>
+<img src="https://i0.wp.com/biznakenya.com/wp-content/uploads/2022/05/Think-Twice.jpg?ssl=1"
+width="250"
+height="250" />
     </header>
 
     <nav>
@@ -74,7 +108,7 @@
         </ul>
     </nav>
 
-    <main> 
+    <main>
         <button>Product</button>
         <button>Order</button>
         <button>Payment</button>
@@ -82,8 +116,307 @@
         <button>Submit</button>
     </main>
 
-    <img src="https://nairobifashionhub.co.ke/wp-content/uploads/2020/03/Nairobi-fashion-hub-Top-10-Online-Fashion-store-1.jpg" alt="Shop with us">
-    <img src="https://i0.wp.com/biznakenya.com/wp-content/uploads/2022/05/Think-Twice.jpg?ssl=1" alt="Shop with us">
 
+<!-- Products Section -->
+<section id="products">
+    <h2>Manage Products</h2>
+
+    <!-- Product Listing -->
+    <ul id="productList">
+        <!-- Product items will be dynamically added here -->
+    </ul>
+
+    <!-- Add Product Button -->
+    <button onclick="addProduct()">Add Product</button>
+
+    <!-- Add Product Form -->
+    <form id="addProductForm">
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" name="productName" required>
+
+        <label for="productPrice">Product Price:</label>
+        <input type="number" id="productPrice" name="productPrice" required>
+
+        <button type="button" onclick="saveProduct()">Save Product</button>
+    </form>
+
+    <!-- Include JavaScript for product management -->
+    <script>
+        // Function to add a new product
+        function addProduct() {
+            // Show the add product modal or form
+            document.getElementById('addProductForm').reset();
+        }
+
+        // Function to save the new product
+        function saveProduct() {
+            const productName = document.getElementById('productName').value;
+            const productPrice = document.getElementById('productPrice').value;
+
+            // Call your save product function or API here
+            // Example: saveProduct(productName, productPrice);
+
+            console.log(`Saving new product - Name: ${productName}, Price: $${productPrice}`);
+
+            // Add the new product to the product list
+            const productList = document.getElementById('productList');
+            const newProductItem = document.createElement('li');
+            newProductItem.textContent = `${productName} - $${productPrice}`;
+            productList.appendChild(newProductItem);
+
+            // Close the add product form
+            document.getElementById('addProductForm').reset();
+        }
+
+        // Add other functions related to product management here
+    </script>
+
+    <!-- Add other elements related to product management here -->
+</section>
+
+
+
+
+<!-- Orders Section -->
+<section id="orders">
+    <h2>Order Management</h2>
+
+    <!-- Order Listing -->
+    <ul id="orderList">
+        <!-- Order items will be dynamically added here -->
+    </ul>
+
+    <!-- View Orders Button -->
+    <button onclick="viewOrders()">View Orders</button>
+
+    <!-- Add Order Form -->
+    <form id="addOrderForm">
+        <label for="orderProduct">Product:</label>
+        <input type="text" id="orderProduct" name="orderProduct" required>
+
+        <label for="orderQuantity">Quantity:</label>
+        <input type="number" id="orderQuantity" name="orderQuantity" required>
+
+        <label for="orderTotal">Total:</label>
+        <input type="number" id="orderTotal" name="orderTotal" required>
+
+        <button type="button" onclick="addOrder()">Add Order</button>
+    </form>
+
+    <!-- Include JavaScript for order management -->
+    <script>
+        // Simulated order data for demonstration purposes
+        const orders = [
+            { id: 1, product: 'Product A', quantity: 2, total: 50, status: 'Processing' },
+            { id: 2, product: 'Product B', quantity: 1, total: 30, status: 'Shipped' },
+            // Add more orders as needed
+        ];
+
+        // Function to view orders
+        function viewOrders() {
+            // Display orders in the order list
+            const orderList = document.getElementById('orderList');
+            orderList.innerHTML = ''; // Clear existing content
+
+            orders.forEach(order => {
+                const orderItem = document.createElement('li');
+                orderItem.textContent = `Order #${order.id}: ${order.quantity} x ${order.product} - Total: $${order.total} - Status: ${order.status}`;
+                orderList.appendChild(orderItem);
+            });
+        }
+
+        // Function to add a new order
+        function addOrder() {
+            const orderProduct = document.getElementById('orderProduct').value;
+            const orderQuantity = document.getElementById('orderQuantity').value;
+            const orderTotal = document.getElementById('orderTotal').value;
+
+            // Call your add order function or API here
+            // Example: addOrder(orderProduct, orderQuantity, orderTotal);
+
+            console.log(`Adding new order - Product: ${orderProduct}, Quantity: ${orderQuantity}, Total: $${orderTotal}`);
+        }
+
+        // Add other functions related to order management here
+    </script>
+
+    <!-- Add other elements related to order management here -->
+</section>
+
+
+
+
+
+
+
+<section id="payment">
+    <h2>Payment Section</h2>
+
+    <!-- Payment Listing -->
+    <ul id="paymentList">
+        <!-- Payment items will be dynamically added here -->
+    </ul>
+
+    <!-- View Payments Button -->
+    <button onclick="viewPayments()">View Payments</button>
+
+    <!-- Initiate Payment Form -->
+    <form id="initiatePaymentForm">
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" name="amount" required>
+
+        <label for="method">Payment Method:</label>
+        <input type="text" id="method" name="method" required>
+
+        <button type="button" onclick="initiatePayment()">Initiate Payment</button>
+    </form>
+
+    <!-- Include JavaScript for payment management -->
+    <script>
+        // Simulated payment data for demonstration purposes
+        const payments = [
+            { id: 1, amount: 50, method: 'M-Pesa', status: 'Pending' },
+            { id: 2, amount: 30, method: 'Bank Transfer', status: 'Completed' },
+            // Add more payments as needed
+        ];
+
+        // Function to view payments
+        function viewPayments() {
+            // Display payments in the payment list
+            const paymentList = document.getElementById('paymentList');
+            paymentList.innerHTML = ''; // Clear existing content
+
+            payments.forEach(payment => {
+                const paymentItem = document.createElement('li');
+                paymentItem.textContent = `Payment #${payment.id}: Amount $${payment.amount} - Method: ${payment.method} - Status: ${payment.status}`;
+                paymentList.appendChild(paymentItem);
+            });
+        }
+
+        // Function to initiate a payment
+        function initiatePayment() {
+            const amount = document.getElementById('amount').value;
+            const method = document.getElementById('method').value;
+
+            // Call your initiate payment function or API here
+            // Example: initiatePayment(amount, method);
+
+            console.log(`Initiating ${method} payment of $${amount}`);
+        }
+
+        // Add other functions related to payment management here
+    </script>
+
+    <!-- Add other elements related to payment management here -->
+</section>
+
+        <!-- Add elements related to payment management here -->
+        <!-- Example: Payment methods, payment history, etc. -->
+    </section>
+
+
+
+
+
+
+<section id="customers">
+    <h2>Customer Section</h2>
+
+    <!-- Customer Listing -->
+    <ul id="customerList">
+        <!-- Customer items will be dynamically added here -->
+    </ul>
+
+    <!-- View Customers Button -->
+    <button onclick="viewCustomers()">View Customers</button>
+
+    <!-- Add Customer Form -->
+    <form id="addCustomerForm">
+        <label for="customerName">Name:</label>
+        <input type="text" id="customerName" name="customerName" required>
+
+        <label for="customerEmail">Email:</label>
+        <input type="email" id="customerEmail" name="customerEmail" required>
+
+        <label for="customerPhone">Phone:</label>
+        <input type="tel" id="customerPhone" name="customerPhone" required>
+
+        <button type="button" onclick="addCustomer()">Add Customer</button>
+    </form>
+
+    <!-- Include JavaScript for customer management -->
+    <script>
+        // Simulated customer data for demonstration purposes
+        const customers = [
+            { id: 1, name: 'John Doe', email: 'john@example.com', phone: '123-456-7890' },
+            { id: 2, name: 'Jane Smith', email: 'jane@example.com', phone: '987-654-3210' },
+            // Add more customers as needed
+        ];
+
+        // Function to view customers
+        function viewCustomers() {
+            // Display customers in the customer list
+            const customerList = document.getElementById('customerList');
+            customerList.innerHTML = ''; // Clear existing content
+
+            customers.forEach(customer => {
+                const customerItem = document.createElement('li');
+                customerItem.textContent = `ID: ${customer.id} - Name: ${customer.name} - Email: ${customer.email} - Phone: ${customer.phone}`;
+                customerList.appendChild(customerItem);
+            });
+        }
+
+        // Function to add a new customer
+        function addCustomer() {
+            const customerName = document.getElementById('customerName').value;
+            const customerEmail = document.getElementById('customerEmail').value;
+            const customerPhone = document.getElementById('customerPhone').value;
+
+            // Call your add customer function or API here
+            // Example: addCustomer(customerName, customerEmail, customerPhone);
+
+            console.log(`Adding new customer - Name: ${customerName}, Email: ${customerEmail}, Phone: ${customerPhone}`);
+        }
+
+        // Add other functions related to customer management here
+    </script>
+
+    <!-- Add other elements related to customer management here -->
+</section>
+
+        <!-- Add elements related to customer management here -->
+        <!-- Example: Customer listing, customer details, etc. -->
+    </section>
+
+
+
+
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Phone: 0722147935</p>
+        <p>Email: <a href="mailto:kiprono79@gmail.com">kiprono79@gmail.com</a></p>
+    </section>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Welcome to Kiprono Merchandise Store! We are dedicated to providing high-quality merchandise for all your needs. Our mission is to make your shopping experience enjoyable and convenient.</p>
+    </section>
+
+    <section id="whatWeDo">
+        <h2>What We Do</h2>
+        <p>At Kiprono Merchandise Store, we offer a diverse range of products, including fashion items, electronics, and more. Our commitment is to deliver exceptional service and top-notch products to our valued customers.</p>
+    </section>
+
+    <section id="map">
+        <h2>Find Us on the Map</h2>
+        
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15959.266841435929!2d37.6456042!3d0.0514721!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x178821c819fc1371%3A0x9e4c1b75468a0857!2sKiprono%20Merchandise%20Store!5e0!3m2!1sen!2ske!4v1699661007904!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Kiprono Merchandise Store. All rights reserved.</p>
+    </footer>
 </body>
 </html>
+
